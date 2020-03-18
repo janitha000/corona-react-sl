@@ -26,11 +26,11 @@ const Home = () => {
     return (
         <Container>
             <Row>
-                <Col md={6}>
+                <Col md={6} style={{textAlign:'center'}}>
                     <h2><p>Local Status</p></h2>
                     <StatCardCountry data={statDataCountires} country="Sri Lanka" />
                 </Col>
-                <Col md={6}>
+                <Col md={6} style={{textAlign:'center'}}>
                     <h2><p>Global Status</p></h2>
                     <StatCardGlobal statData={statData} statDataAllSum={statDataAllSum} />
                 </Col>

@@ -3,9 +3,6 @@ import StatCardCountry from '../StatCard/StatCardCountry'
 
 const HomeSearchCountry = ({ seachedCountries }) => {
 
-    useEffect(() => {
-
-    })
     return (
         <div>
             searchedCountries.forEach(country => {
