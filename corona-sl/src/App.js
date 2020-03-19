@@ -8,6 +8,8 @@ import Home from './Home/Home'
 import Header from './Header/Header'
 import NotFound from './NotFound/NotFound'
 
+import StatCardHospital  from './StatCard/StatCardHospital'
+
 function App() {
   return (
     <div>
@@ -15,6 +17,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path='/home' component={Home} />
+          <Route exact path='/hospital' component={StatCardHospital} />
           <Route component={NotFound} />
         </Switch>
 
