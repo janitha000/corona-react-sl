@@ -7,8 +7,10 @@ const { Provider } = store;
 const StateProvider = ({children}) => {
     const [state, dispatch] = useReducer((state, action) => {
         switch(action.type){
-            case 'COUNTY_SEARCH':
+            case 'COUNTRY_SEARCH':
                 return { ...state, countrySearch : action.payload.countrySearch}
+            case 'COUNTRY_DATA_ADD':
+                return { ...state, countryData : action.payload.countryData}
             default:
                 return state;
         }

@@ -9,8 +9,7 @@ const Header = () => {
     const {dispatch} = globalState;
 
     const handleOnChange = (e) => {
-        console.log(e.target.value);
-        dispatch({type : 'COUNTY_SEARCH', payload : {countrySearch : e.target.value}})
+        dispatch({type : 'COUNTRY_SEARCH', payload : {countrySearch : e.target.value}})
     }
 
     return (

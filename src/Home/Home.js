@@ -1,13 +1,12 @@
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState, Fragment, useContext } from 'react'
 import * as Constants from '../Util/Constants'
-import ReactLoading from 'react-loading'
-import { Card, Container, Row, Col } from 'react-bootstrap';
 
 import StatCardGlobal from '../StatCard/StatCardGlobal'
 import StatCardCountry from '../StatCard/StatCardCountry'
 import StatCardHospital from '../StatCard/StatCardHospital'
-import Loading from 'react-loading';
-
+import HomeSearchCountry from '../Home/HomeSearchCountry'
+import Loading from '../Common/Loading'
+import { store } from '../Store/store'
 
 const Home = () => {
     const [statData, setStatData] = useState({});
@@ -15,6 +14,10 @@ const Home = () => {
     const [statDataCountires, setstatDataCountries] = useState([{}]);
     const [statLocal, setStatLocal] = useState({});
     const [isLoaded, setIsLoaded] = useState(false)
+    const [isSearch, setIsSearch] = useState(false)
+    const [searchCountryData, setSearchCountryData] = useState([{}])
+
+    const { state } = useContext(store);
 
     useEffect(() => {
         const promises = Promise.all([
@@ -28,27 +31,15 @@ const Home = () => {
                         setStatData(res1.data);
                         setstatDataAllSum(res2);
                         setstatDataCountries(res3);
-
                     })
-
             })
-
-        // fetch(Constants.STAT_URL_SL)
-        //     .then(response => response.json())
-        //     .then(response => setStatData(response.data))
-
-        // fetch(Constants.STAT_UTL_ALL_SUMMARY)
-        //     .then(res => res.json())
-        //     .then(res => setstatDataAllSum(res))
-
-        // fetch(Constants.STAT_URL_COUNTRIES)
-        //     .then(res => res.json())
-        //     .then(res => setstatDataCountries(res))
 
     }, [])
 
     useEffect(() => {
         getLocalData(statDataCountires);
+        // dispatch({ type: 'COUNTRY_DATA_ADD', payload: { countryData: statDataCountires } })
+
     }, [statDataCountires])
 
     useEffect(() => {
@@ -56,6 +47,23 @@ const Home = () => {
             setIsLoaded(true)
         }
     }, [statLocal])
+
+    useEffect(() => {
+        if (state.countrySearch && state.countrySearch != "") {
+            let countryData = []
+            statDataCountires.forEach(stat => {
+                let upperCaseCountry =  stat.country.toUpperCase();
+                if (upperCaseCountry.search(state.countrySearch.toUpperCase()) != -1) {
+                    countryData.push(stat)
+                }
+            });
+            setSearchCountryData(countryData);
+            setIsSearch(true)
+        }
+        else{
+            setIsSearch(false)
+        }
+    }, [state.countrySearch])
 
     const getLocalData = (data) => {
         data.forEach(stat => {
@@ -65,8 +73,15 @@ const Home = () => {
         });
     }
 
+    
     const HomeDom = () => {
-        let homeDome = isLoaded ? <Fragment>
+        let homeDome = isLoaded ? <HomePageLoaded /> : <Loading />
+        return (homeDome)
+    }
+
+    const HomePageLoaded = () => {
+
+        let HomePage = <Fragment>
             <div style={{ marginLeft: "125px", marginRight: "125px" }}>
                 <h2><p>Local Status</p></h2>
                 <StatCardCountry countryData={statLocal} />
@@ -80,17 +95,14 @@ const Home = () => {
                 <StatCardHospital hospitalData={statData.hospital_data} />
             </div>
         </Fragment>
-            :
-            <div style={{ position: 'absolute', top: '50%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%' }}><Loading /></div>
 
-        return (homeDome)
+        let HomePageSearch = <HomeSearchCountry searchCountryData = {searchCountryData}/>
+
+       let HomePageLoaded = isSearch ? HomePageSearch : HomePage
+
+            return (HomePageLoaded )
     }
 
-    const Loading = () => {
-        return (
-            <ReactLoading type='spinningBubbles' height={100} width={100} color="#596365" />
-        )
-    }
 
     return (
         <HomeDom />
