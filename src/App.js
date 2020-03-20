@@ -10,6 +10,7 @@ import NotFound from './NotFound/NotFound'
 
 import StatCardHospital  from './StatCard/StatCardHospital'
 import HomeSearchCountry from './Home/HomeSearchCountry'
+import Notification from './Notification/Notification'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route exact path='/home' component={Home} />
           <Route exact path='/hospital' component={StatCardHospital} />
           <Route exact path='/search' component={HomeSearchCountry} />
+          <Route exact path='/notification' component={Notification} />
           <Route component={NotFound} />
         </Switch>
 
