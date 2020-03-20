@@ -4,6 +4,7 @@ import * as Constants from '../Util/Constants'
 import StatCardGlobal from '../StatCard/StatCardGlobal'
 import StatCardCountry from '../StatCard/StatCardCountry'
 import StatCardHospital from '../StatCard/StatCardHospital'
+import HomeHospitalTable from './HomeHospitalTable'
 import HomeSearchCountry from '../Home/HomeSearchCountry'
 import Loading from '../Common/Loading'
 import { store } from '../Store/store'
@@ -52,7 +53,7 @@ const Home = () => {
         if (state.countrySearch && state.countrySearch != "") {
             let countryData = []
             statDataCountires.forEach(stat => {
-                let upperCaseCountry =  stat.country.toUpperCase();
+                let upperCaseCountry = stat.country.toUpperCase();
                 if (upperCaseCountry.search(state.countrySearch.toUpperCase()) != -1) {
                     countryData.push(stat)
                 }
@@ -60,7 +61,7 @@ const Home = () => {
             setSearchCountryData(countryData);
             setIsSearch(true)
         }
-        else{
+        else {
             setIsSearch(false)
         }
     }, [state.countrySearch])
@@ -73,7 +74,7 @@ const Home = () => {
         });
     }
 
-    
+
     const HomeDom = () => {
         let homeDome = isLoaded ? <HomePageLoaded /> : <Loading />
         return (homeDome)
@@ -92,15 +93,18 @@ const Home = () => {
 
             </div>
             <div style={{ marginLeft: "125px", marginRight: "125px" }}>
-                <StatCardHospital hospitalData={statData.hospital_data} />
+                <h2><p>Local Hospital Status</p></h2>
+
+                {/* <StatCardHospital hospitalData={statData.hospital_data} /> */}
+                <HomeHospitalTable hospitalData = {statData.hospital_data}/>
             </div>
         </Fragment>
 
-        let HomePageSearch = <HomeSearchCountry searchCountryData = {searchCountryData}/>
+        let HomePageSearch = <HomeSearchCountry searchCountryData={searchCountryData} />
 
-       let HomePageLoaded = isSearch ? HomePageSearch : HomePage
+        let HomePageLoaded = isSearch ? HomePageSearch : HomePage
 
-            return (HomePageLoaded )
+        return (HomePageLoaded)
     }
 
 
