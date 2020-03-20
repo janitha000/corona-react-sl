@@ -9,6 +9,7 @@ import Header from './Header/Header'
 import NotFound from './NotFound/NotFound'
 
 import StatCardHospital  from './StatCard/StatCardHospital'
+// import HomeSearchCountry from './Home/HomeSearchCountry'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Switch>
           <Route exact path='/home' component={Home} />
           <Route exact path='/hospital' component={StatCardHospital} />
+          {/* <Route exact path='/search' component={HomeSearchCountry} /> */}
           <Route component={NotFound} />
         </Switch>
 

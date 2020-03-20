@@ -1,15 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import StatCardCountry from '../StatCard/StatCardCountry'
 
-const HomeSearchCountry = ({ seachedCountries }) => {
+import { store} from '../Store/store'
+
+const HomeSearchCountry = () => {
+    const {state} = useContext(store);
+
+    const searchCountries = () => {
+        console.log(state.countrySearch);
+        let countryCards = [];
+
+        // <StatCardCountry countryData={seachedCountries}  />
+
+        return(<div>Search Country</div>)
+
+    }
 
     return (
-        <div>
-            searchedCountries.forEach(country => {
-                <StatCardCountry data={seachedCountries} country={country.country} />
-            });
-        </div>
-
+        <searchCountries />
     )
 }
 

@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import StatCard from '../StatCard/StatCard'
 
-function StatCardCountry({ data, country })  {
+function StatCardCountry({ countryData })  {
     const [statData, setStatData] = useState({});
 
-    useEffect(() => {
-        data.forEach(stat => {
-            if (stat.country === country) {
-                setStatData(stat)
-            }
-        });
-    }, [data])
+    // useEffect(() => {
+    //     data.forEach(stat => {
+    //         if (stat.country === country) {
+    //             setStatData(stat)
+    //         }
+    //     });
+    // }, [data])
 
 
 
     return (
         <div className="row">
-            <StatCard title="Total Cases" number={statData.cases} />
-            <StatCard title="Deaths" number={statData.deaths} />
-            <StatCard title="Recovered" number={statData.recovered} />
-            <StatCard title="Active" number={statData.active} />
-            <StatCard title="Critical" number={statData.critical} />
+            <StatCard title="Total Cases" number={countryData.cases} />
+            <StatCard title="Deaths" number={countryData.deaths} />
+            <StatCard title="Recovered" number={countryData.recovered} />
+            <StatCard title="Active" number={countryData.active} />
+            <StatCard title="Critical" number={countryData.critical} />
         </div>)
 }
 

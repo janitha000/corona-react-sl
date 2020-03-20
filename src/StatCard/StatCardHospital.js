@@ -2,11 +2,6 @@ import React, { useEffect, useState, Fragment } from 'react'
 import StatCard from '../StatCard/StatCard'
 
 const StatCardHospital = ({ hospitalData }) => {
-    const [data, setData] = useState();
-
-    useEffect(() => {
-        setData(hospitalData);
-    }, [])
 
     const HospitalCards = ({ data }) => {
         if (data == undefined || Object.entries(data).length === 0) {

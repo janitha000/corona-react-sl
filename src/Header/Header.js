@@ -1,8 +1,18 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+
+import {store} from '../Store/store'
 
 
 const Header = () => {
+    const globalState = useContext(store);
+    const {dispatch} = globalState;
+
+    const handleOnChange = (e) => {
+        console.log(e.target.value);
+        dispatch({type : 'COUNTY_SEARCH', payload : {countrySearch : e.target.value}})
+    }
+
     return (
         <Fragment>
             <Navbar bg="light" expand="lg">
@@ -21,8 +31,8 @@ const Header = () => {
                         </NavDropdown>
                     </Nav>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
+                        <FormControl type="text" placeholder="Search for countries" className="mr-sm-2" onChange = {handleOnChange} />
+                        <Button variant="outline-success" >Search</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
