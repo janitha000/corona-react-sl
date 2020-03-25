@@ -4,3 +4,5 @@ export const STAT_URL_COUNTRIES = "https://coronavirus-19-api.herokuapp.com/coun
 
 export const LOGIN_URL = "http://localhost:3001/auth/login"
 export const REGISTER_URL = "http://localhost:3001/auth/register"
+
+export const SENTIMENT_URL = "http://localhost:3001/analytics/sentiment"
