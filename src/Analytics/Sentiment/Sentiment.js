@@ -12,6 +12,7 @@ import { store } from '../../Store/store'
 
 function Sentiment({ title }) {
     const [sentiments, setSentiments] = useState({ "Neutral": 0, "Positive": 0, "Negative": 0, "Mixed": 0 });
+    const [sentiment, setSentiment] = useState("");
     let textData = '';
 
     const { state } = useContext(store);
@@ -35,7 +36,8 @@ function Sentiment({ title }) {
     const getSentiments = () => {
         Axios.post(Constants.SENTIMENT_URL, { "text": textData }).then(res => {
             console.log(res);
-            setSentiments(res.data.SentimentScore)
+            setSentiments(res.data.SentimentScore);
+            setSentiment(res.data.Sentiment)
         })
     }
 
@@ -49,10 +51,10 @@ function Sentiment({ title }) {
                     </Col>
                     <Col md={6}>
                         <Row>
-                            <SentimentValues name="Neutral" value={sentiments.Neutral} />
-                            <SentimentValues name="Positive" value={sentiments.Positive} />
-                            <SentimentValues name="Negative" value={sentiments.Negative} />
-                            <SentimentValues name="Mixed" value={sentiments.Mixed} />
+                            <SentimentValues name="Neutral" value={sentiments.Neutral.toFixed(4)} />
+                            <SentimentValues name="Positive" value={sentiments.Positive.toFixed(4)} />
+                            <SentimentValues name="Negative" value={sentiments.Negative.toFixed(4)} />
+                            <SentimentValues name="Mixed" value={sentiments.Mixed.toFixed(4)} />
                         </Row>
                     </Col>
                 </Row>
