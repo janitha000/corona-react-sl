@@ -13,7 +13,10 @@ const StateProvider = ({ children }) => {
                 return { ...state, countryData: action.payload.countryData }
             case 'SENTIMENT_SEARCH':
                 return { ...state, sentimentSearch: action.payload.sentimentSearch }
-
+            case 'IS_AUTHENTICATED':
+                return { ...state, isAuthenticated: action.payload.isAuthenticated }
+            case 'ADD_ACCESS_TOKEN':
+                return { ...state, accessToken: action.payload.accessToken }
             default:
                 return state;
         }

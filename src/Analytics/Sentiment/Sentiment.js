@@ -34,7 +34,7 @@ function Sentiment({ title }) {
     }
 
     const getSentiments = () => {
-        Axios.post(Constants.SENTIMENT_URL, { "text": textData }).then(res => {
+        Axios.post(Constants.SENTIMENT_URL,  { "text": textData }, { headers: {"Authorization" : `Bearer ${state.accessToken}`}}).then(res => {
             console.log(res);
             setSentiments(res.data.SentimentScore);
             setSentiment(res.data.Sentiment)
