@@ -9,6 +9,7 @@ import './App.css';
 import { store } from './Store/store'
 
 import Home from './Home/Home'
+import FirstPage from './Home/FirstPage'
 import Header from './Header/Header'
 import NotFound from './NotFound/NotFound'
 
@@ -18,8 +19,11 @@ import Notification from './Notification/Notification'
 import Login from './Auth/Login';
 import Register from './Auth/Register'
 import Analytics from './Analytics/Analytics'
+import Profile from './Profile/Profile'
 
 import OLoginCallback from './Auth/OAuth/OLoginCallback'
+import Auth0Login from './Auth/Auth0/Auth0Login'
+import PrivateRoute from './Auth/Auth0/PrivateRoute'
 
 function App() {
   const { state } = useContext(store);
@@ -31,20 +35,14 @@ function App() {
 
   const socket = socketIOClient(endpoint, { 'query': query });
 
-  const ProtectedRoute = ({ component: Component, ...rest }) => {
-    return (
-      <Route {...rest} render={props => state.isAuthenticated ? (<Component {...props} />) :
-        (<Redirect to={{ pathname: "/login" }} />)} />
-    )
-
-  }
   return (
     <div>
       <Router>
         <ToastProvider>
           <Header />
           <Switch>
-            <ProtectedRoute path='/home' component={Home} />
+            <PrivateRoute path='/home' component={Home} />
+            <Route path='/' component={FirstPage} />
             <Route exact path='/hospital' component={StatCardHospital} />
             <Route exact path='/search' component={HomeSearchCountry} />
             <Route exact path='/notification' render={(props) => <Notification socket={socket} />} />
@@ -52,6 +50,8 @@ function App() {
             <Route exact path='/Register' component={Register} />
             <Route exact path='/Analytics' component={Analytics} />
             <Route exact path='/oauth_callback' component={OLoginCallback} />
+            <Route exact path='/auth0/login' component={Auth0Login} />
+            <Route exact path='/profile' component={Profile} />
             <Route component={NotFound} />
           </Switch>
         </ToastProvider>

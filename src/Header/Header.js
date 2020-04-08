@@ -1,21 +1,34 @@
 import React, { Fragment, useState, useContext } from 'react'
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import { LinkContainer } from 'react-router-bootstrap'
 
 import { store } from '../Store/store'
-
+import { useAuth0 } from '../Contexts/auth0-context copy'
 
 const Header = () => {
     const globalState = useContext(store);
     const { dispatch } = globalState;
     const { state } = useContext(store);
+    const { isAuthenticated, loginWithRedirect, logout, user, isLoading } = useAuth0();
+
 
     const handleOnChange = (e) => {
         dispatch({ type: 'COUNTRY_SEARCH', payload: { countrySearch: e.target.value } })
     }
 
+
     const Auth = () => {
-        let body = (state.isAuthenticated) ? <LinkContainer to="/logout"><Button variant="outline-success">Sign Out</Button></LinkContainer> : <LinkContainer to="/login"><Button variant="outline-success">Sign In</Button></LinkContainer>
+        // let body = (state.isAuthenticated) ? <LinkContainer to="/logout"><Button variant="outline-success">Sign Out</Button></LinkContainer> : <LinkContainer to="/login"><Button variant="outline-success">Sign In</Button></LinkContainer>
+        let userName = {isLoading} ? 'Profile' : {user}
+        let body = (isAuthenticated) ?
+            <Fragment>
+                <Link to="/profile">{userName}</Link>
+                <Button onClick={() => logout({})} variant="outline-success">Sign Out</Button>
+            </Fragment>
+
+            :
+            <Button onClick={() => loginWithRedirect({})} variant="outline-success">Sign In</Button>
 
         return (body);
     }
