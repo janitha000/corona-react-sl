@@ -18,8 +18,9 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
     useEffect(() => {
         const initAuth0 = async () => {
             const initOptions = {
-                domain: "",
+                domain: "janitha000.auth0.com",
                 client_id: "",
+                audience : "http://localhost:3001",
                 redirect_uri: window.location.origin
             }
             try{

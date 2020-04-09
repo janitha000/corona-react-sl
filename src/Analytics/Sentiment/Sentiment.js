@@ -5,6 +5,8 @@ import FormArea from '../../Common/FormArea'
 import * as Constants from '../../Util/Constants'
 import Axios from 'axios';
 import { store } from '../../Store/store'
+import {useAuth0} from '../../Contexts/auth0-context copy'
+
 
 // import SentimentInput from './SentimentInput'
 
@@ -13,6 +15,8 @@ import { store } from '../../Store/store'
 function Sentiment({ title }) {
     const [sentiments, setSentiments] = useState({ "Neutral": 0, "Positive": 0, "Negative": 0, "Mixed": 0 });
     const [sentiment, setSentiment] = useState("");
+    const { getTokenSilently } = useAuth0();
+
     let textData = '';
 
     const { state } = useContext(store);
@@ -33,8 +37,9 @@ function Sentiment({ title }) {
 
     }
 
-    const getSentiments = () => {
-        Axios.post(Constants.SENTIMENT_URL,  { "text": textData }, { headers: {"Authorization" : `Bearer ${state.accessToken}`}}).then(res => {
+    const getSentiments = async () => {
+        const token = await getTokenSilently();
+        Axios.post(Constants.SENTIMENT_URL,  { "text": textData }, { headers: {"Authorization" : `Bearer ${token}`}}).then(res => {
             console.log(res);
             setSentiments(res.data.SentimentScore);
             setSentiment(res.data.Sentiment)

@@ -42,7 +42,7 @@ function App() {
           <Header />
           <Switch>
             <PrivateRoute path='/home' component={Home} />
-            <Route path='/' component={FirstPage} />
+            <Route exact path='/' component={FirstPage} />
             <Route exact path='/hospital' component={StatCardHospital} />
             <Route exact path='/search' component={HomeSearchCountry} />
             <Route exact path='/notification' render={(props) => <Notification socket={socket} />} />
