@@ -9,6 +9,7 @@ const FirstPage = () => {
            <div style={{textAlign: "center"}}>
                <h1>My-Site</h1>
            </div>
+           <p>This is the home page</p>
             {/* <img style={{ maxWidth: "300vh", marginRight: "150px", marginRigh: "150px"}} src={nature} /> */}
         </div>
     )
