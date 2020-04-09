@@ -1,3 +1,8 @@
+.card-body{
+    text-align: center;
+}
+
 .image{
-    margin: auto;
+    width : 150px;
+    height: 150px;
 }

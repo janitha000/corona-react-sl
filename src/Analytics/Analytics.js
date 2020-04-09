@@ -3,6 +3,7 @@ import { Accordion, Card, Button } from 'react-bootstrap'
 import './Analytics.css'
 
 import Sentiment from './Sentiment/Sentiment'
+import EntityDetection from './Sentiment/EntityDetection'
 
 const Analytics = () => {
 

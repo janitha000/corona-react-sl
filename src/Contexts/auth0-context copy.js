@@ -19,7 +19,7 @@ export const Auth0Provider = ({ children, onRedirectCallback = DEFAULT_REDIRECT_
         const initAuth0 = async () => {
             const initOptions = {
                 domain: "janitha000.auth0.com",
-                client_id: "",
+                client_id: "3k04jzJWoELYl0wd29KvfGs6JQu7W6SD",
                 audience : "http://localhost:3001",
                 redirect_uri: window.location.origin
             }
